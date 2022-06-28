@@ -19,7 +19,7 @@
 
     <p class="h4 mb-4">Add New User</p>
 
-    <form th:method="POST" th:action="@{/users}" th:object="${user}" >
+    <form th:method="POST" th:action="@{/admin}" th:object="${user}" >
 
             <input type="hidden" th:field="*{id}">
 
@@ -39,7 +39,7 @@
     </form>
 
     <hr>
-    <a th:href="@{/users}">Back to Users list</a>
+    <a th:href="@{/admin}">Back to Users list</a>
 
 </div>
 

@@ -19,7 +19,7 @@
 
     <p class="h4 mb-4">Update user</p>
 
-    <form th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
+    <form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
 
         <input type="hidden" th:field="*{id}">
 
@@ -39,7 +39,7 @@
     </form>
 
     <hr>
-    <a th:href="@{/users}">Back to Users list</a>
+    <a th:href="@{/admin}">Back to Users list</a>
 
 </div>
 

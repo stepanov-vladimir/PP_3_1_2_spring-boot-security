@@ -22,7 +22,7 @@
     <h3>Users List</h3>
     <hr>
 
-    <a th:href="@{/users/new}"
+    <a th:href="@{/admin/new}"
        class="btn btn-primary mb-3">
         New User
     </a>
@@ -48,13 +48,13 @@
             <td th:text="${tempUser.age}"></td>
 
             <td>
-                <a th:href="@{/users/{id}/update(id=${tempUser.id})}"
+                <a th:href="@{/admin/{id}/update(id=${tempUser.id})}"
                    class="btn btn-info btn-sm">
                     Update
                 </a>
             </td>
             <td>
-                <form th:action="@{/users/{id}(id=${tempUser.id})}" th:method="delete">
+                <form th:action="@{/admin/{id}(id=${tempUser.id})}" th:method="delete">
                     <input class="btn btn-danger btn-sm" type="submit" value="Delete"
                            onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false"/>
                 </form>
