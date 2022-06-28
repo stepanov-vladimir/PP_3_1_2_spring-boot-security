@@ -2,26 +2,28 @@ package com.stepanov.springbootcrud.controller;
 
 import com.stepanov.springbootcrud.dao.UserRepository;
 import com.stepanov.springbootcrud.model.User;
-import com.stepanov.springbootcrud.service.UserService;
+import com.stepanov.springbootcrud.service.MyUserDetailsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Field;
-import java.util.Map;
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private final MyUserDetailsService userService;
 
-    @GetMapping("/{id}")
-    public String showUserPage(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.findById(id));
-        return "admin/user-page";
+    @GetMapping
+    public String currentUserName(Principal principal, Model model) {
+       User user = userService.findByEmail(principal.getName());
+        model.addAttribute("user", user);
+       return "admin/user-page";
     }
+
+
+
 }

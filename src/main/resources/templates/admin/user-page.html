@@ -16,25 +16,30 @@
 
 <div class="container">
 
-    <h3>User page</h3>
+    <h3>User information page</h3>
     <hr>
 
     <table class="table table-bordered table-striped">
         <thead class="custom">
         <tr>
+            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
             <th>Age</th>
+            <th>Roles</th>
+
         </tr>
         </thead>
 
         <tbody>
         <tr>
+            <td th:text="${user.getId}">VALUE</td>
             <td th:text="${user.getFirstName}">VALUE</td>
             <td th:text="${user.getLastName}">VALUE</td>
             <td th:text="${user.getEmail}">VALUE</td>
             <td th:text="${user.getAge}">VALUE</td>
+            <td th:text="${user.getRoles}">VALUE</td>
         </tr>
         </tbody>
 
