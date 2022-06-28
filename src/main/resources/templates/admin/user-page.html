@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
 
 <head>
     <meta charset="utf-8">
@@ -13,10 +17,24 @@
 
 <body>
 
-
 <div class="container">
 
-    <h3>User information page</h3>
+    <div layout:fragment="content">
+        <p>
+            Welcome <b><span sec:authentication="principal.username">User</span></b>
+            <br>
+            Your role(s): <b><span sec:authentication="principal.authorities">User</span></b>
+        <p>
+            <a th:href="@{/logout}">Logout</a>
+        </p>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <p>
+                <a th:href="@{/admin}">Admin Page</a>
+            </p>
+        </div>
+    </div>
+
+        <h3>User information page</h3>
     <hr>
 
     <table class="table table-bordered table-striped">

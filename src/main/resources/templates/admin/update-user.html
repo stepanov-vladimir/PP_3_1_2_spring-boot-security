@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
 
 <head>
     <meta charset="utf-8">
@@ -13,6 +17,22 @@
 
 <body>
 <div class="container">
+
+    <div layout:fragment="content">
+        <p>
+            Welcome <b><span sec:authentication="principal.username">User</span></b>
+            <br>
+            Your role(s): <b><span sec:authentication="principal.authorities">User</span></b>
+        <p>
+        <p>
+            <a th:href="@{/logout}">Logout</a>
+        </p>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <p>
+                <a th:href="@{/admin}">Admin Page</a>
+            </p>
+        </div>
+    </div>
 
     <h3>Users List</h3>
     <hr>
@@ -35,8 +55,18 @@
         <input type="text" th:field="*{age}"
                class="form-control mb-4 col-4" placeholder="Age">
 
-        <input type="text" th:field="*{Password}"
+        <input type="text" th:field="*{password}"
                class="form-control mb-4 col-4" placeholder="Password">
+
+        <div class="form-group row">
+            <label class="col-1">Roles: </label>
+            <div class="col-8">
+                <th:block th:each="role: ${roles}">
+                    <input type="checkbox" th:field="*{roles}"
+                           th:text="${role.name}" th:value="${role.id}" class="m-2" />
+                </th:block>
+            </div>
+        </div>
 
         <button type="submit" class="btn btn-primary btn-sm mb-3">Update</button>
     </form>

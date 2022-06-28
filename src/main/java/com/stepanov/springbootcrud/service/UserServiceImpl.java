@@ -1,6 +1,8 @@
 package com.stepanov.springbootcrud.service;
 
+import com.stepanov.springbootcrud.dao.RoleRepository;
 import com.stepanov.springbootcrud.dao.UserRepository;
+import com.stepanov.springbootcrud.model.Role;
 import com.stepanov.springbootcrud.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    private final RoleRepository roleRepository;
 
     @Override
     public List<User> findAll() {
@@ -47,5 +51,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(int id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        return roleRepository.findAll();
     }
 }

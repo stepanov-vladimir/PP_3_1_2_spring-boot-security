@@ -1,11 +1,14 @@
 package com.stepanov.springbootcrud.controller;
 
+import com.stepanov.springbootcrud.model.Role;
 import com.stepanov.springbootcrud.model.User;
 import com.stepanov.springbootcrud.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,7 +36,12 @@ public class AdminController {
 
     @GetMapping("/{id}/update")
     public String updateUser(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userService.findById(id));
+        User user = userService.findById(id);
+        List<Role> roles = userService.getRoles();
+
+        model.addAttribute("user", user);
+        model.addAttribute("roles", roles);
+
         return "admin/update-user";
     }
 
