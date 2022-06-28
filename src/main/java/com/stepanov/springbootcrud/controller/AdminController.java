@@ -24,7 +24,9 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public String showNewUserForm(@ModelAttribute("user") User user) {
+    public String showNewUserForm(Model model, @ModelAttribute("user") User user) {
+        List<Role> roles = userService.getRoles();
+        model.addAttribute("roles", roles);
         return "admin/new-user";
     }
 

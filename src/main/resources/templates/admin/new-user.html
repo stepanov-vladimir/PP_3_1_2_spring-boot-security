@@ -60,6 +60,16 @@
             <input type="text" th:field="*{password}"
                    class="form-control mb-4 col-4" placeholder="Password">
 
+            <div class="form-group row">
+                <label class="col-1">Roles: </label>
+                <div class="col-8">
+                    <th:block th:each="role: ${roles}">
+                        <input type="checkbox" th:field="*{roles}"
+                               th:text="${role.name}" th:value="${role.id}" class="m-2" />
+                    </th:block>
+                </div>
+            </div>
+
         <button type="submit" class="btn btn-primary btn-sm mb-3">Save User</button>
     </form>
 
