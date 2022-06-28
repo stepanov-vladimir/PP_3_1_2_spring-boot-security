@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorator="layout">
 
 <head>
@@ -15,7 +15,7 @@
     <link rel="stylesheet"
           th:href="@{/css/table.css}">
 
-    <title>Users List</title>
+    <title>Admin panel</title>
 
 </head>
 
@@ -32,14 +32,9 @@
         <p>
             <a th:href="@{/logout}">Logout</a>
         </p>
-        <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <p>
-                <a th:href="@{/admin}">Admin Page</a>
-            </p>
-        </div>
     </div>
 
-    <h3>Users List</h3>
+    <h3>Admin panel</h3>
     <hr>
 
     <a th:href="@{/admin/new}"
@@ -85,8 +80,13 @@
             </td>
         </tr>
         </tbody>
-
     </table>
+    <hr>
+    <div sec:authorize="hasAuthority('ADMIN')">
+        <p>
+            <a th:href="@{/user}">Go to User Page</a>
+        </p>
+    </div>
 </div>
 
 </body>
