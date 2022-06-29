@@ -15,9 +15,11 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     private final SuccessUserHandler successUserHandler;
 
     private MyUserDetailsService userDetailsService;
+
     @Autowired
     public void setUserDetailsService(MyUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -32,7 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                     .csrf().disable()
                     .authorizeRequests()
-                    .antMatchers("/", "/index").permitAll()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/admin/**").hasAuthority("ADMIN")
+                    .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -59,6 +63,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return authenticationProvider;
     }
-
-
 }
