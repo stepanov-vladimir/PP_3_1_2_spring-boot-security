@@ -1,6 +1,5 @@
 package com.stepanov.springbootcrud.controller;
 
-import com.stepanov.springbootcrud.dao.UserRepository;
 import com.stepanov.springbootcrud.model.User;
 import com.stepanov.springbootcrud.service.MyUserDetailsService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,4 @@ public class UserController {
         model.addAttribute("user", user);
        return "admin/user-page";
     }
-
-
-
 }
