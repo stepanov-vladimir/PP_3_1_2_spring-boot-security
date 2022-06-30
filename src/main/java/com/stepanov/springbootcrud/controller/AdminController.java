@@ -18,16 +18,10 @@ public class AdminController {
     private final UserService userService;
 
     @GetMapping()
-    public String listAllUsers(Model model) {
+    public String listAllUsers(Model model, @ModelAttribute("user") User user) {
         model.addAttribute("users", userService.findAll());
-        return "admin/list-users";
-    }
-
-    @GetMapping("/new")
-    public String showNewUserForm(Model model, @ModelAttribute("user") User user) {
-        List<Role> roles = userService.getRoles();
-        model.addAttribute("roles", roles);
-        return "admin/new-user";
+        model.addAttribute("roles", userService.getRoles());
+        return "admin/admin-page";
     }
 
     @PostMapping
