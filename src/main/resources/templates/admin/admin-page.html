@@ -95,15 +95,17 @@
                                         <td th:text="${tempUser.email}">john@mail.ru</td>
                                         <td th:text="${tempUser.age}">33</td>
                                         <td th:text="${tempUser.roles}">USER</td>
+
+
                                         <td>
-                                            <a th:href="@{/admin/{id}/update(id=${tempUser.id})}"
+                                            <!-- Update button triggers update modal -->
+                                            <a th:href="@{/admin/{id}(id=${tempUser.id})}"
                                                class="btn btn-info btn-sm">
                                                 Update
                                             </a>
                                         </td>
                                         <td>
-
-                                            <!-- Delete button triggers modal -->
+                                            <!-- Delete button triggers delete modal -->
                                             <button type="button" class="btn btn-sm btn-danger"
                                                     data-bs-toggle="modal"
                                                     th:attr="data-bs-target='#deleteModal'+*{tempUser.id}">
@@ -113,6 +115,7 @@
 
                                             <!-- Delete Modal -->
                                             <div class="modal fade" th:id="*{'deleteModal'+{tempUser.id}}"
+                                                 id="deleteModal"
                                                  tabindex="-1" aria-labelledby="deleteModalLabel"
                                                  aria-hidden="true">
                                                 <div
@@ -126,22 +129,75 @@
                                                                     aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Are you sure you want to delete this User?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                            <form th:action="@{/admin/{id}(id=${tempUser.id})}"
-                                                                  th:method="delete">
-                                                                <input class="btn btn-danger"
-                                                                       type="submit" value="Delete">
+                                                            <form th:method="GET">
+                                                                <div class="form-group">
+                                                                    <label for="id" class="m-1"><b>ID</b></label>
+                                                                    <input type="text"
+                                                                           th:value="*{tempUser.id}"
+                                                                           class="form-control mb-4 col-4"
+                                                                           id="id"
+                                                                           disabled="disabled">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="firstName" class="m-1"><b>First name</b></label>
+                                                                    <input type="text"
+                                                                           th:value="*{tempUser.firstName}"
+                                                                           class="form-control mb-4 col-4"
+                                                                           id="firstName"
+                                                                           disabled="disabled">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="lastName" class="m-1"><b>Last
+                                                                        name</b></label>
+                                                                    <input type="text"
+                                                                           th:value="*{tempUser.lastName}"
+                                                                           class="form-control mb-4 col-4"
+                                                                           id="lastName"
+                                                                           disabled="disabled">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="email" class="m-1"><b>Email</b></label>
+                                                                    <input type="text"
+                                                                           th:value="*{tempUser.email}"
+                                                                           class="form-control mb-4 col-4"
+                                                                           id="email"
+                                                                           disabled="disabled">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="age" class="m-1"><b>Age</b></label>
+                                                                    <input type="number"
+                                                                           th:value="*{tempUser.age}"
+                                                                           class="form-control mb-4 col-4"
+                                                                           id="age"
+                                                                           disabled="disabled">
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="mb-3"><b>Roles:</b>
+                                                                        <th:block th:each="role: ${tempUser.roles}">
+                                                                            <input type="checkbox" checked disabled
+                                                                                   th:text="${role.name}"
+                                                                                   th:value="${role.id}"
+                                                                                   class="m-2"/>
+                                                                        </th:block>
+                                                                    </label>
+                                                                </div>
                                                             </form>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close
+                                                                </button>
+                                                                <form th:action="@{/admin/{id}(id=${tempUser.id})}"
+                                                                      th:method="delete">
+                                                                    <input class="btn btn-danger btn" type="submit"
+                                                                           value="Delete">
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- END of 'Delete Modal' -->
+                                                <!-- END of 'Delete Modal' -->
 
+                                            </div>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -174,7 +230,7 @@
                                     Select roles for this User:
                                     <th:block th:each="role: ${roles}">
                                         <b><input type="checkbox" th:field="*{roles}" th:text="${role.name}"
-                                               th:value="${role.id}" class="m-2" /></b>
+                                                  th:value="${role.id}" class="m-2"/></b>
                                     </th:block>
                                     <br>
                                     <button type="submit" class="btn btn-primary mt-4">Add new User</button>

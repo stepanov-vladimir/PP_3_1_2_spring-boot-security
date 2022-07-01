@@ -19,8 +19,10 @@ public class AdminController {
 
     @GetMapping()
     public String listAllUsers(Model model, @ModelAttribute("user") User user) {
-        model.addAttribute("users", userService.findAll());
-        model.addAttribute("roles", userService.getRoles());
+        List<User> users = userService.findAll();
+        List<Role> roles = userService.getRoles();
+        model.addAttribute("users", users);
+        model.addAttribute("roles", roles);
         return "admin/admin-page";
     }
 
@@ -30,7 +32,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/{id}/update")
+    @GetMapping("/{id}")
     public String updateUser(Model model, @PathVariable("id") int id) {
         User user = userService.findById(id);
         List<Role> roles = userService.getRoles();

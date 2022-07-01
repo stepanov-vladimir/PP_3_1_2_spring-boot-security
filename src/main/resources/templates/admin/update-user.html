@@ -36,24 +36,38 @@
 
     <form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
 
-        <input type="hidden" th:field="*{id}">
-
-        <input type="text" th:field="*{firstName}"
-               class="form-control mb-4 col-4" placeholder="First name">
-
-        <input type="text" th:field="*{lastName}"
-               class="form-control mb-4 col-4" placeholder="Last name">
-
-        <input type="text" th:field="*{email}"
-               class="form-control mb-4 col-4" placeholder="Email">
-
-        <input type="text" th:field="*{age}"
-               class="form-control mb-4 col-4" placeholder="Age">
+        <div class="form-group">
+            <label for="id" class="col-form-label">ID</label>
+            <input type="text" th:field="*{id}" class="form-control mb-4 col-4" placeholder="ID" id="id">
+        </div>
 
         <div class="form-group">
+            <label for="firstName" class="col-form-label">First name</label>
+            <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First name"
+                   id="firstName">
+        </div>
+
+        <div class="form-group">
+            <label for="lastName" class="col-form-label">Last name</label>
+            <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last name"
+                   id="lastName">
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-form-label">Email</label>
+            <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email" id="email">
+        </div>
+
+        <div class="form-group">
+            <label for="age" class="col-form-label">Age</label>
+            <input type="text" th:field="*{age}" class="form-control mb-4 col-4" placeholder="Age" id="age">
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="col-form-label">Password</label>
             <div class="input-group" id="show_hide_password">
-                <input type="password" th:field="*{password}"
-                       class="form-control mb-4 col-4" placeholder="Password">
+                <input type="password" th:field="*{password}" class="form-control mb-4 col-4" placeholder="Password"
+                       id="password">
             </div>
         </div>
 
@@ -62,7 +76,7 @@
             <div class="col-8">
                 <th:block th:each="role: ${roles}">
                     <input type="checkbox" th:field="*{roles}"
-                           th:text="${role.name}" th:value="${role.id}" class="m-2" />
+                           th:text="${role.name}" th:value="${role.id}" class="m-2"/>
                 </th:block>
             </div>
         </div>
