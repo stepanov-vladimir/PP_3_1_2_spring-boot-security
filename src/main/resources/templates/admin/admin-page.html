@@ -102,12 +102,46 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <form th:action="@{/admin/{id}(id=${tempUser.id})}"
-                                                  th:method="delete">
-                                                <input class="btn btn-danger btn-sm" type="submit"
-                                                       value="Delete"
-                                                       onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false" />
-                                            </form>
+
+                                            <!-- Delete button triggers modal -->
+                                            <button type="button" class="btn btn-sm btn-danger"
+                                                    data-bs-toggle="modal"
+                                                    th:attr="data-bs-target='#deleteModal'+*{tempUser.id}">
+                                                Delete
+                                            </button>
+                                            <!-- END of 'Delete button triggers modal' -->
+
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" th:id="*{'deleteModal'+{tempUser.id}}"
+                                                 tabindex="-1" aria-labelledby="deleteModalLabel"
+                                                 aria-hidden="true">
+                                                <div
+                                                        class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="deleteModalLabel">
+                                                                Confirm action</h5>
+                                                            <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete this User?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                            <form th:action="@{/admin/{id}(id=${tempUser.id})}"
+                                                                  th:method="delete">
+                                                                <input class="btn btn-danger"
+                                                                       type="submit" value="Delete">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- END of 'Delete Modal' -->
+
                                         </td>
                                     </tr>
                                     </tbody>
@@ -120,8 +154,8 @@
                             <div class="card-header">
                                 <h4>Add new User</h4>
                             </div>
-                            <div class="container m-3">
-                                <form th:method="POST" th:action="save" th:object="${user}">
+                            <div class="container m-4 col-6">
+                                <form th:method="POST" th:action="@{/admin}" th:object="${user}">
                                     <input type="hidden" th:field="*{id}">
                                     <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4"
                                            placeholder="First name">
@@ -137,16 +171,13 @@
                                                    class="form-control mb-4 col-4" placeholder="Password">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-1">Roles: </label>
-                                        <div class="col-8">
-                                            <th:block th:each="role: ${roles}">
-                                                <input type="checkbox" th:field="*{roles}" th:text="${role.name}"
-                                                       th:value="${role.id}" class="m-2" />
-                                            </th:block>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary btn mb-3">Add new User</button>
+                                    Select roles for this User:
+                                    <th:block th:each="role: ${roles}">
+                                        <b><input type="checkbox" th:field="*{roles}" th:text="${role.name}"
+                                               th:value="${role.id}" class="m-2" /></b>
+                                    </th:block>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary mt-4">Add new User</button>
                                 </form>
                             </div>
                         </div>
