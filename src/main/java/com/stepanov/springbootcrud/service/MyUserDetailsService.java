@@ -1,7 +1,6 @@
 package com.stepanov.springbootcrud.service;
 
 import com.stepanov.springbootcrud.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,16 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class MyUserDetailsService implements UserDetailsService {
 
     private final UserServiceImpl userService;
 
-    @Autowired
     public MyUserDetailsService(UserServiceImpl userService) {
         this.userService = userService;
     }
 
-    @Transactional
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userService.getUserByEmail(email);
@@ -26,6 +24,6 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(String.format("User with email '%s' not found!", email));
         }
         return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), user.getPassword(),  user.getAuthorities());
+                user.getEmail(), user.getPassword(), user.getAuthorities());
     }
 }

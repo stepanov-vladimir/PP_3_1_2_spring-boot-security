@@ -44,12 +44,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    //TODO разобраться с "startsWith()"
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("editUser") User user, Principal principal) {
-        if (!userService.getUserByEmail(principal.getName()).getPassword().startsWith("$")) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
+    public String update(@ModelAttribute("editUser") User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.updateUser(user);
         return "redirect:/admin";
     }

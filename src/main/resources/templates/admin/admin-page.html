@@ -97,12 +97,12 @@
                                     </thead>
                                     <tbody style="border-top-width: 1px; border-color:lightgrey">
                                     <tr th:each="user : ${allUsers}">
-                                        <td th:text="${user.id}">1</td>
-                                        <td th:text="${user.firstName}">John</td>
-                                        <td th:text="${user.lastName}">DoW</td>
-                                        <td th:text="${user.age}">john@mail.ru</td>
-                                        <td th:text="${user.email}">33</td>
-                                        <td><a th:text="${#strings.setJoin(user.getRoles(), ', ')}">ROLE</a></td>
+                                        <td th:text="${user.id}">ID</td>
+                                        <td th:text="${user.firstName}">First name</td>
+                                        <td th:text="${user.lastName}">Last name</td>
+                                        <td th:text="${user.age}">Age</td>
+                                        <td th:text="${user.email}">Email</td>
+                                        <td><a th:text="${#strings.setJoin(user.getRoles(), ', ')}">ROLE(S)</a></td>
                                         <td>
                                             <!-- Edit button triggers update modal -->
                                             <button th:data-bs-target="${'#editModal' + user.getId()}" type="button"

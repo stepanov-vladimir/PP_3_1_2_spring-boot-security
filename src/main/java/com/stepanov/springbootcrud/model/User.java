@@ -56,21 +56,6 @@ public class User implements UserDetails {
                 .collect(Collectors.toList());
     }
 
-    //TODO возможно убрать в итоге
-    public Set<String> getRolesNames() {
-        return getRoles().stream()
-                .map(Role::getName)
-                .map(name -> name.substring(5))
-                .collect(Collectors.toSet());
-    }
-    //TODO возможно убрать в итоге
-    public boolean containsRoleName(String roleName) {
-        return roles.stream()
-                .map(Role::getName)
-                .toList()
-                .contains(roleName);
-    }
-
     @Override
     public String getUsername() {
         return email;
