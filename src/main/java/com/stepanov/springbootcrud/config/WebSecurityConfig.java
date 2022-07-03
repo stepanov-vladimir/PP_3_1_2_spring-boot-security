@@ -13,9 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private SuccessUserHandler successUserHandler;
-
-    private MyUserDetailsService userDetailsService;
+    private final SuccessUserHandler successUserHandler;
+    private final MyUserDetailsService userDetailsService;
 
     public WebSecurityConfig(SuccessUserHandler successUserHandler, MyUserDetailsService userDetailsService) {
         this.successUserHandler = successUserHandler;
@@ -28,8 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/").permitAll()
-                    .antMatchers("/admin/**").hasAuthority("ADMIN")
-                    .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
+                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()

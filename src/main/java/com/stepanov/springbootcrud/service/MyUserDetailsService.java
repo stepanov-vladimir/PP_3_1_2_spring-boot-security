@@ -1,45 +1,31 @@
 package com.stepanov.springbootcrud.service;
 
-import com.stepanov.springbootcrud.dao.UserRepository;
-import com.stepanov.springbootcrud.model.Role;
 import com.stepanov.springbootcrud.model.User;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
-    UserRepository userRepository;
+    private final UserServiceImpl userService;
 
-    public MyUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Autowired
+    public MyUserDetailsService(UserServiceImpl userService) {
+        this.userService = userService;
     }
 
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-
+        User user = userService.getUserByEmail(email);
         if (user == null) {
-            throw new UsernameNotFoundException(String.format("User with email '%s' not found", email));
+            throw new UsernameNotFoundException(String.format("User with email '%s' not found!", email));
         }
-
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
-    }
-
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
-                .collect(Collectors.toList());
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(), user.getPassword(),  user.getAuthorities());
     }
 }

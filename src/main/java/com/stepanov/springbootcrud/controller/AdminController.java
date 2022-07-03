@@ -2,12 +2,15 @@ package com.stepanov.springbootcrud.controller;
 
 import com.stepanov.springbootcrud.model.Role;
 import com.stepanov.springbootcrud.model.User;
+import com.stepanov.springbootcrud.service.RoleService;
 import com.stepanov.springbootcrud.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -16,42 +19,44 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
-    @GetMapping()
-    public String listAllUsers(Model model, @ModelAttribute("user") User user) {
-        List<User> users = userService.findAll();
-        List<Role> roles = userService.getRoles();
-        model.addAttribute("users", users);
-        model.addAttribute("roles", roles);
+    @GetMapping
+    public String listAllUsers(Model model, Principal principal) {
+        List<User> allUsers = userService.getAllUsers();
+        User userLogin = userService.getUserByEmail(principal.getName());
+        List<Role> allRoles = roleService.findAllRoles();
+        User newUser = new User();
+
+        model.addAttribute("allUsers", allUsers);
+        model.addAttribute("userLogin", userLogin);
+        model.addAttribute("allRoles", allRoles);
+        model.addAttribute("newUser", newUser);
+
         return "admin/admin-page";
     }
 
-    @PostMapping
-    public String addNewUser(@ModelAttribute("user") User user) {
-        userService.save(user);
+    @PostMapping("/new")
+    public String saveUser(@ModelAttribute("newUser") User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 
-    @GetMapping("/{id}")
-    public String updateUser(Model model, @PathVariable("id") int id) {
-        User user = userService.findById(id);
-        List<Role> roles = userService.getRoles();
-
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roles);
-
-        return "admin/update-user";
-    }
-
+    //TODO разобраться с "startsWith()"
     @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.save(user);
+    public String update(@ModelAttribute("editUser") User user, Principal principal) {
+        if (!userService.getUserByEmail(principal.getName()).getPassword().startsWith("$")) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteById(id);
+    @DeleteMapping("/{id}/delete")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
         return "redirect:/admin";
     }
 }

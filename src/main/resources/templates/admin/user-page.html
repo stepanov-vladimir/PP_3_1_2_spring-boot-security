@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" layout:decorator="layout">
 
@@ -22,10 +22,11 @@
     <div class="row">
         <nav class="navbar sticky-top navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand text-white">
-                    <b><span sec:authentication="principal.username">User</span></b>
-                    with role(s): <b><span sec:authentication="principal.authorities">User</span></b>
-                </a>
+                <p class="navbar-brand text-white">
+                    <b><span class="align-middle" th:text="${loggedUser.getEmail()}"></span></b>
+                    <span class="align-middle">with roles:</span>
+                    <b><span class="align-middle" th:text="${#strings.setJoin(loggedUser.getRoles(), ', ')}"></span></b>
+                </p>
                 <a th:href="@{/logout}" class="link-secondary" style="font-size: 125%">Logout</a>
             </div>
         </nav>
@@ -72,12 +73,12 @@
                             </thead>
                             <tbody style="border-top-width: 1px; border-color:lightgrey">
                             <tr>
-                                <td th:text="${user.getId}">VALUE</td>
-                                <td th:text="${user.getFirstName}">VALUE</td>
-                                <td th:text="${user.getLastName}">VALUE</td>
-                                <td th:text="${user.getEmail}">VALUE</td>
-                                <td th:text="${user.getAge}">VALUE</td>
-                                <td th:text="${user.getRoles}">VALUE</td>
+                                <td th:text="${loggedUser.getId}">VALUE</td>
+                                <td th:text="${loggedUser.getFirstName}">VALUE</td>
+                                <td th:text="${loggedUser.getLastName}">VALUE</td>
+                                <td th:text="${loggedUser.getEmail}">VALUE</td>
+                                <td th:text="${loggedUser.getAge}">VALUE</td>
+                                <td th:text="${#strings.setJoin(loggedUser.getRoles(), ', ')}">VALUE</td>
                             </tr>
                             </tbody>
                         </table>
