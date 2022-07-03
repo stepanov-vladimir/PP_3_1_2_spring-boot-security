@@ -77,22 +77,22 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() { //true если учетная запись пользователя действительна (т.е. не просрочена)
+    public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isAccountNonLocked() { //true если пользователь не заблокирован
+    public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
-    public boolean isCredentialsNonExpired() { //true если учетные данные пользователя действительны (т. е. не просрочены)
+    public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isEnabled() { //true если пользователь включен
+    public boolean isEnabled() {
         return true;
     }
 

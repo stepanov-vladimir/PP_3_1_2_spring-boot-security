@@ -25,19 +25,19 @@ public class AdminController {
     @GetMapping
     public String listAllUsers(Model model, Principal principal) {
         List<User> allUsers = userService.getAllUsers();
-        User userLogin = userService.getUserByEmail(principal.getName());
+        User loggedUser = userService.getUserByEmail(principal.getName());
         List<Role> allRoles = roleService.findAllRoles();
         User newUser = new User();
 
         model.addAttribute("allUsers", allUsers);
-        model.addAttribute("userLogin", userLogin);
+        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("allRoles", allRoles);
         model.addAttribute("newUser", newUser);
 
         return "admin/admin-page";
     }
 
-    @PostMapping("/new")
+    @PostMapping
     public String saveUser(@ModelAttribute("newUser") User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
@@ -54,7 +54,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";
