@@ -12,6 +12,7 @@
 
     <title>Admin panel</title>
 
+
 </head>
 
 <body>
@@ -105,7 +106,7 @@
                                         <td>
                                             <!-- Edit button triggers update modal -->
                                             <button th:data-bs-target="${'#editModal' + user.getId()}" type="button"
-                                                    class="btn btn-sm btn-info" data-bs-toggle="modal">Edit
+                                                    class="btn btn-sm btn-info text-white" data-bs-toggle="modal">Edit
                                             </button>
                                             <!-- END of Edit button -->
 
@@ -132,7 +133,7 @@
                                                                 <div class="form-group mx-4">
                                                                     <label for="idEdit" class="m-1"><b>ID</b></label>
                                                                     <input type="number"
-                                                                           th:value="*{editUser.id}"
+                                                                           th:value="*{editUser.getId()}"
                                                                            class="form-control mb-4 col-4"
                                                                            id="idEdit"
                                                                            name="id"
@@ -141,7 +142,7 @@
                                                                 <div class="form-group mx-4">
                                                                     <label for="firstNameEdit" class="m-1"><b>First name</b></label>
                                                                     <input type="text"
-                                                                           th:value="*{editUser.firstName}"
+                                                                           th:value="*{editUser.getFirstName()}"
                                                                            class="form-control mb-4 col-4"
                                                                            name="firstName"
                                                                            id="firstNameEdit">
@@ -149,7 +150,7 @@
                                                                 <div class="form-group mx-4">
                                                                     <label for="lastNameEdit" class="m-1"><b>Last name</b></label>
                                                                     <input type="text"
-                                                                           th:value="*{editUser.lastName}"
+                                                                           th:value="*{editUser.getLastName()}"
                                                                            class="form-control mb-4 col-4"
                                                                            name="lastName"
                                                                            id="lastNameEdit">
@@ -158,7 +159,7 @@
                                                                     <label for="emailEdit"
                                                                            class="m-1"><b>Email</b></label>
                                                                     <input type="email"
-                                                                           th:value="*{editUser.email}"
+                                                                           th:value="*{editUser.getEmail()}"
                                                                            class="form-control mb-4 col-4"
                                                                            name="email"
                                                                            id="emailEdit">
@@ -167,7 +168,7 @@
                                                                     <label for="ageEdit"
                                                                            class="m-1"><b>Age</b></label>
                                                                     <input type="number"
-                                                                           th:value="*{editUser.age}"
+                                                                           th:value="*{editUser.getAge()}"
                                                                            class="form-control mb-4 col-4"
                                                                            name="age"
                                                                            id="ageEdit">
@@ -176,14 +177,14 @@
                                                                     <label for="passwordEdit"
                                                                            class="m-1"><b>Password</b></label>
                                                                     <input type="password"
-                                                                           th:value="*{editUser.password}"
+                                                                           th:value="*{editUser.getPassword()}"
                                                                            class="form-control mb-4 col-4"
                                                                            name="password"
                                                                            id="passwordEdit">
                                                                 </div>
                                                                 <div class="form-group mx-4">
-                                                                    <div class="form-group row">
-                                                                        <label class="mb-2"><b>Roles:</b>
+                                                                    <div class="form-group row mb-2">
+                                                                        <label class="m-1"><b>Roles:</b>
                                                                             <th:block th:each="role: ${allRoles}">
                                                                                 <input type="checkbox"
                                                                                        th:checked="${editUser.getRoles().contains(role)}"
@@ -294,7 +295,7 @@
                                                                 </div>
                                                                 <div class="form-group mx-4">
                                                                     <div class="form-group row">
-                                                                        <label class="mb-2"><b>Roles:</b>
+                                                                        <label class="m-1"><b>Roles:</b>
                                                                             <th:block th:each="role: ${user.roles}">
                                                                                 <input type="checkbox" checked disabled
                                                                                        th:text="${role.name}"
@@ -350,13 +351,13 @@
                                            placeholder="First name">
                                     <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4"
                                            placeholder="Last name">
-                                    <input type="text" th:field="*{email}" class="form-control mb-4 col-4"
+                                    <input type="email" th:field="*{email}" class="form-control mb-4 col-4"
                                            placeholder="Email">
-                                    <input type="text" th:field="*{age}" class="form-control mb-4 col-4"
+                                    <input type="number" th:field="*{age}" class="form-control mb-4 col-4"
                                            placeholder="Age">
                                     <div class="form-group">
                                         <div class="input-group" id="show_hide_password">
-                                            <input type="password" th:field="*{password}"
+                                            <input type="password" id="password" name="password" th:field="*{password}"
                                                    class="form-control mb-4 col-4" placeholder="Password">
                                         </div>
                                     </div>
