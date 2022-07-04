@@ -14,29 +14,25 @@
 </head>
 
 <body>
-<div class="container mt-5 col-2">
-    <form class="form-signin" method="post" action="/login">
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                <h2 class="form-signin-heading text-center">Please sign in</h2>
-            </div>
-            <div class="card-body">
-                <input type="text" id="email" name="email" class="form-control col-4 mb-3"
-                       placeholder="Email" required autofocus>
 
-                <input type="password" id="password" name="password" class="form-control col-4"
-                       placeholder="Password" required>
 
-                <input name="_csrf" type="hidden" value="64be384c-82b8-48b9-a646-4b31c4832522"/>
+
+<div class="container col-2 mt-5">
+
+        <form class="form-outline m-4" method="post" action="/login">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <input type="text" id="email" name="email" class="form-control col-4"Q
+                   placeholder="Email" required autofocus>
+            <input type="password" id="password" name="password" class="form-control col-4"
+                   placeholder="Password" required>
+            <input name="_csrf" type="hidden" value="64be384c-82b8-48b9-a646-4b31c4832522"/>
+
+            <div class="d-grid gap-2 mt-2">
+                <button class="btn btn-primary d-grid" type="submit">Sign in</button>
             </div>
-            <div class="card-footer">
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button class="btn btn-primary btn-block m-1 " type="submit">Sign in</button>
-                </div>
-            </div>
-        </div>
-    </form>
+        </form>
 
 </div>
+
 </body>
 </html>

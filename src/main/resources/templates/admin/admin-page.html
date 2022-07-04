@@ -128,74 +128,78 @@
                                                         <!-- Edit modal body -->
                                                         <form th:action="@{admin/{id}(id=${editUser.getId()})}"
                                                               th:method="PATCH">
-                                                            <div class="modal-body">
-
-                                                                <div class="form-group mx-4">
-                                                                    <label for="idEdit" class="m-1"><b>ID</b></label>
-                                                                    <input type="number"
-                                                                           th:value="*{editUser.getId()}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           id="idEdit"
-                                                                           name="id"
-                                                                           disabled="disabled">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <label for="firstNameEdit" class="m-1"><b>First name</b></label>
-                                                                    <input type="text"
-                                                                           th:value="*{editUser.getFirstName()}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           name="firstName"
-                                                                           id="firstNameEdit">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <label for="lastNameEdit" class="m-1"><b>Last name</b></label>
-                                                                    <input type="text"
-                                                                           th:value="*{editUser.getLastName()}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           name="lastName"
-                                                                           id="lastNameEdit">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <label for="emailEdit"
-                                                                           class="m-1"><b>Email</b></label>
-                                                                    <input type="email"
-                                                                           th:value="*{editUser.getEmail()}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           name="email"
-                                                                           id="emailEdit">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <label for="ageEdit"
-                                                                           class="m-1"><b>Age</b></label>
-                                                                    <input type="number"
-                                                                           th:value="*{editUser.getAge()}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           name="age"
-                                                                           id="ageEdit">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <label for="passwordEdit"
-                                                                           class="m-1"><b>Password</b></label>
-                                                                    <input type="password"
-                                                                           th:value="*{editUser.getPassword()}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           name="password"
-                                                                           id="passwordEdit">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <div class="form-group row mb-2">
-                                                                        <label class="m-1"><b>Roles:</b>
-                                                                            <th:block th:each="role: ${allRoles}">
-                                                                                <input type="checkbox"
-                                                                                       th:checked="${editUser.getRoles().contains(role)}"
-                                                                                       th:text="${role.name}"
-                                                                                       th:value="${role.id}"
-                                                                                       name="roles"
-                                                                                       class="m-2"/>
-                                                                            </th:block>
-                                                                        </label>
+                                                            <div class="align-items-center text-center mx-auto">
+                                                                <div class="modal-body">
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="idEdit"
+                                                                               class="m-1"><b>ID</b></label>
+                                                                        <input type="number"
+                                                                               th:value="*{editUser.getId()}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               id="idEdit"
+                                                                               name="id"
+                                                                               disabled="disabled">
+                                                                    </div>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="firstNameEdit" class="m-1"><b>First
+                                                                            name</b></label>
+                                                                        <input type="text"
+                                                                               th:value="*{editUser.getFirstName()}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               name="firstName"
+                                                                               id="firstNameEdit">
+                                                                    </div>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="lastNameEdit" class="m-1"><b>Last
+                                                                            name</b></label>
+                                                                        <input type="text"
+                                                                               th:value="*{editUser.getLastName()}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               name="lastName"
+                                                                               id="lastNameEdit">
+                                                                    </div>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="emailEdit"
+                                                                               class="m-1"><b>Email</b></label>
+                                                                        <input type="email"
+                                                                               th:value="*{editUser.getEmail()}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               name="email"
+                                                                               id="emailEdit">
+                                                                    </div>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="ageEdit"
+                                                                               class="m-1"><b>Age</b></label>
+                                                                        <input type="number"
+                                                                               th:value="*{editUser.getAge()}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               name="age"
+                                                                               id="ageEdit">
+                                                                    </div>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="passwordEdit"
+                                                                               class="m-1"><b>Password</b></label>
+                                                                        <input type="password"
+                                                                               th:value="*{editUser.getPassword()}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               name="password"
+                                                                               id="passwordEdit">
+                                                                    </div>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="roles"><b>Role:</b></label>
+                                                                        <select multiple size="2" name="roles"
+                                                                                th:id="roles" class="form-control"
+                                                                                th:value="${user.getRoles()}" required>
+                                                                            <option
+                                                                                    th:each="role:${allRoles}"
+                                                                                    th:value="${role.getId()}"
+                                                                                    th:selected="${editUser.getRoles().contains(role)}"
+                                                                                    th:text="${role.toString()}">
+                                                                            </option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
+
 
                                                                 <!-- Edit Modal footer -->
 
@@ -208,21 +212,22 @@
                                                                         </button>
                                                                         <button type="submit"
                                                                                 class="btn btn-primary">
-                                                                            Save changes
+                                                                            Edit
                                                                         </button>
                                                                     </div>
                                                                 </div>
-
-                                                                <!-- END of Edit Modal footer -->
-
                                                             </div>
                                                         </form>
+                                                        <!-- END of Edit Modal footer -->
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- END of Edit modal -->
-
                                         </td>
+
+
+                                        <!-- END of Edit modal -->
+
+
                                         <td>
                                             <!-- Delete button triggers delete modal -->
                                             <button type="button" class="btn btn-sm btn-danger"
@@ -242,7 +247,8 @@
 
                                                         <!-- Delete Modal header -->
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="deleteModalLabel">Delete user</h5>
+                                                            <h5 class="modal-title" id="deleteModalLabel">Delete
+                                                                user</h5>
                                                             <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
@@ -251,61 +257,69 @@
 
                                                         <!-- Delete Modal body -->
                                                         <div class="modal-body">
-                                                            <form th:method="GET">
-                                                                <div class="form-group mx-4">
-                                                                    <label for="id" class="m-1"><b>ID</b></label>
-                                                                    <input type="text"
-                                                                           th:value="*{user.id}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           id="id"
-                                                                           disabled="disabled">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <label for="firstName" class="m-1"><b>First name</b></label>
-                                                                    <input type="text"
-                                                                           th:value="*{user.firstName}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           id="firstName"
-                                                                           disabled="disabled">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <label for="lastName" class="m-1"><b>Last
-                                                                        name</b></label>
-                                                                    <input type="text"
-                                                                           th:value="*{user.lastName}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           id="lastName"
-                                                                           disabled="disabled">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <label for="email" class="m-1"><b>Email</b></label>
-                                                                    <input type="text"
-                                                                           th:value="*{user.email}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           id="email"
-                                                                           disabled="disabled">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <label for="age" class="m-1"><b>Age</b></label>
-                                                                    <input type="number"
-                                                                           th:value="*{user.age}"
-                                                                           class="form-control mb-4 col-4"
-                                                                           id="age"
-                                                                           disabled="disabled">
-                                                                </div>
-                                                                <div class="form-group mx-4">
-                                                                    <div class="form-group row">
-                                                                        <label class="m-1"><b>Roles:</b>
-                                                                            <th:block th:each="role: ${user.roles}">
-                                                                                <input type="checkbox" checked disabled
-                                                                                       th:text="${role.name}"
-                                                                                       th:value="${role.id}"
-                                                                                       class="my-2 ms-3 me-1"/>
-                                                                            </th:block>
-                                                                        </label>
+                                                            <div class="align-items-center text-center mx-auto">
+                                                                <form th:method="GET">
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="id" class="m-1"><b>ID</b></label>
+                                                                        <input type="text"
+                                                                               th:value="*{user.id}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               id="id"
+                                                                               disabled="disabled">
                                                                     </div>
-                                                                </div>
-                                                            </form>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="firstName" class="m-1"><b>First
+                                                                            name</b></label>
+                                                                        <input type="text"
+                                                                               th:value="*{user.firstName}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               id="firstName"
+                                                                               disabled="disabled">
+                                                                    </div>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="lastName" class="m-1"><b>Last
+                                                                            name</b></label>
+                                                                        <input type="text"
+                                                                               th:value="*{user.lastName}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               id="lastName"
+                                                                               disabled="disabled">
+                                                                    </div>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="email"
+                                                                               class="m-1"><b>Email</b></label>
+                                                                        <input type="text"
+                                                                               th:value="*{user.email}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               id="email"
+                                                                               disabled="disabled">
+                                                                    </div>
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="age" class="m-1"><b>Age</b></label>
+                                                                        <input type="number"
+                                                                               th:value="*{user.age}"
+                                                                               class="form-control mb-4 col-4"
+                                                                               id="age"
+                                                                               disabled="disabled">
+                                                                    </div>
+
+                                                                    <div class="form-group mx-4">
+                                                                        <label for="roles"><b>Role:</b></label>
+                                                                        <select multiple size="2" name="roles"
+                                                                                th:id="roles" class="form-control"
+                                                                                th:value="${user.getRoles()}" required>
+                                                                            <option
+                                                                                    th:each="role:${allRoles}"
+                                                                                    th:value="${role.getId()}"
+                                                                                    th:selected="${user.getRoles().contains(role)}"
+                                                                                    th:text="${role.toString()}"
+                                                                            disabled>
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
                                                         </div>
 
                                                         <!-- Modal footer -->
@@ -327,7 +341,6 @@
                                                 </div>
                                             </div>
                                             <!-- END of 'Delete Modal' -->
-
                                         </td>
                                     </tr>
                                     </tbody>
@@ -340,34 +353,48 @@
 
                     <!-- "New user" tab -->
                     <div class="tab-pane" id="newuser">
-                        <div class="card mb-5">
+                        <div class="card m-3">
                             <div class="card-header">
                                 <h4>Add new User</h4>
                             </div>
-                            <div class="container m-4 col-6">
+                            <div class="container m-3">
                                 <form th:method="POST" th:action="@{/admin}" th:object="${newUser}">
-                                    <input type="hidden" th:field="*{id}">
-                                    <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4"
-                                           placeholder="First name">
-                                    <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4"
-                                           placeholder="Last name">
-                                    <input type="email" th:field="*{email}" class="form-control mb-4 col-4"
-                                           placeholder="Email">
-                                    <input type="number" th:field="*{age}" class="form-control mb-4 col-4"
-                                           placeholder="Age">
-                                    <div class="form-group">
-                                        <div class="input-group" id="show_hide_password">
-                                            <input type="password" id="password" name="password" th:field="*{password}"
-                                                   class="form-control mb-4 col-4" placeholder="Password">
+                                    <div class="col-lg-4 align-items-center text-center mx-auto">
+                                        <input type="hidden" th:field="*{id}">
+                                        <label class=""><b>First name</b></label>
+                                        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4"
+                                               placeholder="First name">
+                                        <label class=""><b>Last name</b></label>
+                                        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4"
+                                               placeholder="Last name">
+                                        <label class=""><b>Age</b></label>
+                                        <input type="number" th:field="*{age}" class="form-control mb-4 col-4"
+                                               placeholder="Age">
+                                        <label class=""><b>Email</b></label>
+                                        <input type="email" th:field="*{email}" class="form-control mb-4 col-4"
+                                               placeholder="Email">
+                                        <label class=""><b>Password</b></label>
+                                        <div class="form-group">
+                                            <div class="input-group" id="show_hide_password">
+                                                <input type="password" id="password" name="password"
+                                                       th:field="*{password}"
+                                                       class="form-control mb-4 col-4" placeholder="Password">
+                                            </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="role" class="mr-sm-2"><b>Role</b></label>
+                                            <select multiple size="2" name="role" id="role" class="form-control"
+                                                    th:field="*{roles}"
+                                                    required>
+                                                <option th:each="role:${allRoles}" th:value="${role.id}"
+                                                        th:text="${role.name}">
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-lg btn-success mt-4">Add new User</button>
                                     </div>
-                                    Select roles for this User:
-                                    <th:block th:each="role: ${allRoles}">
-                                        <b><input type="checkbox" th:field="*{roles}" th:text="${role.name}"
-                                                  th:value="${role.id}" class="m-2"/></b>
-                                    </th:block>
-                                    <br>
-                                    <button type="submit" class="btn btn-primary mt-4">Add new User</button>
                                 </form>
                             </div>
                         </div>
